@@ -80,6 +80,6 @@ public class HelloWorld {
          */
         // 单行注释示例
         // 它将输出 Hello World
-        System.out.println("Hello World");
+        // System.out.println("Hello World");
     }
 }
