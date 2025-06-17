@@ -78,7 +78,9 @@ public class MybatisSql {
      * AND() 使用 AND 来分隔当前的 WHERE子句条件。 可以被多次调用，但在一行中多次调用会生成错误的 SQL。由于 WHERE 和 HAVING都会自动使用 AND 拼接, 因此这个方法并不常用，只是为了完整性才被定义出来。
      */
     public static String selectJoinProvider() {
-        // SELECT DISTINCT id, user_name, user_phone FROM student WHERE (user_name like '%张三%') AND (user_phone like '%177%') OR (user_age > 10);
+        // SELECT DISTINCT id, user_name, user_phone
+        // FROM student
+        // WHERE (user_name like '%张三%') AND (user_phone like '%177%') OR (user_age > 10);
         return new SQL()
                 // .SELECT("id")
                 .SELECT_DISTINCT("user_name", "user_phone")

@@ -5,7 +5,10 @@ import java.util.Arrays;
 public class SE_04_Array {
 
     public static void main(String[] args) {
+        array();
         ergodic();
+        bubbleSort();
+        twoArray();
     }
 
     /**

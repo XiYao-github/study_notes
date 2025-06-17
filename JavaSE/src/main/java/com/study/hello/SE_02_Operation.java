@@ -2,17 +2,21 @@ package com.study.hello;
 
 public class SE_02_Operation {
 
-    static double d;
     static int i;
     static int j;
     static int k;
     static int age;
+    static double d;
     static String str;
     static Object obj;
     static boolean bool;
 
     public static void main(String[] args) {
-        position();
+        arithmetic();
+        relational();
+        logic();
+        assignment();
+        condition();
     }
 
     /**

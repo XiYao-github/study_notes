@@ -5,15 +5,49 @@ public class SE_01_Variable {
     static boolean bool;
     static byte by;
     static char ch;
-    static double d;
-    static float f;
+    static short sh;
     static int i;
     static long l;
-    static short sh;
+    static float f;
+    static double d;
     static String str;
 
     public static void main(String[] args) {
-        variableTypeConvert();
+        // literal();
+        variableType();
+        // variableTypeConvert();
+    }
+
+    /**
+     * 字面量
+     * - 字面量就是数据在程序中的<书写格式>
+     */
+    public static void literal() {
+        // 整数
+        System.out.println(666);
+
+        // 小数
+        System.out.println(3.66);
+
+        // 字符: 字符必须用'单引号'引起来
+        System.out.println('a');
+        System.out.println('A');
+        System.out.println(' '); // 空格也算字符
+
+        // 特殊字符：\t表示制表符 \n表示换行符
+        System.out.println('\t'); // 相当于一个tab键，专业叫做制表符
+        System.out.println('\n'); // 相当于一个Enter键，专业叫做换行符
+
+        // 字符串：字符串是"双引号"引起来的
+        System.out.println("Hello World");
+
+        // 布尔值：只有两个值 true、false
+        System.out.println(true); // 代表真
+        System.out.println(false); // 代表假
+
+        // 空值：一个特殊值，通常指找不到元素
+        String str = null;
+        System.out.println(str); // 找不到元素，输出会使用字符串"null"代替
     }
 
     /**
@@ -23,11 +57,11 @@ public class SE_01_Variable {
      * - 变量的类型和存放的数据类型需要一致
      * - 变量定义的时候可以没有初始值，但是使用前必须有初始值
      * - 变量存在访问范围一般为"{}"内，同一个范围内，多个变量的名字不能一样。
-     * - 变量定义时可以不给赋初始值，但是在使用时，变量里必须有值
      */
     public static void variable() {
         // 定义变量：数据类型 变量名称 = 初始值;
         int age = 18;
+        System.out.println(age);
     }
 
     /**
@@ -40,17 +74,18 @@ public class SE_01_Variable {
         // 流程：
         // if、else、switch、case、
         // try、catch、finally、
-        // do、while、for、continue、break、return
+        // do、while、for、continue、break、return、
         // 修饰：
         // public、protected、private、default、
         // class、abstract、interface、enum、
         // extends、implements、static、final、
-        // volatile、synchronized
+        // volatile、synchronized、
         // 依赖、异常、判断：
-        // package、import、this、super、throws、throw、new、void
-        // assert、instanceof
+        // package、import、this、super、
+        // throws、throw、new、void
+        // assert、instanceof、
         // 罕见(忽略不计)
-        // const、goto、native、strictfp、transient
+        // const、goto、native、strictfp、transient、
     }
 
     /**
@@ -74,11 +109,11 @@ public class SE_01_Variable {
     public static void variableType() {
         /*  元素默认值规则
             基本类型
-            byte、short、char、int、long    0
-            float、double                 0.0
-            boolean                      false
+                byte、char、short、int、long    0
+                float、double                 0.0
+                boolean                      false
             引用类型
-            类、接口、数组、String          null
+               类、接口、数组、String          null
         */
         System.out.println("基本类型：byte 二进制位数：" + Byte.SIZE + "\t默认值-Byte :" + by);
         System.out.println("基本类型：char 二进制位数：" + Character.SIZE + "\t默认值-Character:('u0000')" + ch);
