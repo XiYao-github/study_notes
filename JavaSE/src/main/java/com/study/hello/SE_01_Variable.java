@@ -14,8 +14,11 @@ public class SE_01_Variable {
 
     public static void main(String[] args) {
         // literal();
-        variableType();
-        // variableTypeConvert();
+        // variable();
+        // keyword();
+        // identifier();
+        // variableType();
+        variableTypeConvert();
     }
 
     /**
@@ -30,8 +33,8 @@ public class SE_01_Variable {
         System.out.println(3.66);
 
         // 字符: 字符必须用'单引号'引起来
-        System.out.println('a');
-        System.out.println('A');
+        System.out.println('a'); // 97
+        System.out.println('A'); // 65
         System.out.println(' '); // 空格也算字符
 
         // 特殊字符：\t表示制表符 \n表示换行符
@@ -93,7 +96,7 @@ public class SE_01_Variable {
      * - 标志符就是名字，变量、方法、类等命名时使用的字符序列称为标识符。
      */
     public static void identifier() {
-        // 基本组成：由数字、字母、下划线(_) 和美元符($) 等组成
+        // 基本组成：由数字、字母、下划线(_)和美元符($)等组成
         // 强制要求：不能以数字开头、不能用关键字做为名字、且是区分大小写的
         // 包名：多单词组成时，所有字母都小写：aaa.bbb.ccc
         // 类/接口名：多单词组成时，所有单词的首字母大写：XxxYyyZzz
@@ -135,16 +138,20 @@ public class SE_01_Variable {
      * - 注意：byte,short,char运算时会转换成int类型参与运算
      */
     public static void variableTypeConvert() {
-        // 自动类型转换
+        // 自动类型转换：小字节变大字节，本质就是转成字节然后覆盖
         // 类型范围小的变量，可以直接赋值给类型范围大的变量。
+        // byte                                01100001
+        // int      00000000 00000000 00000000 01100001
         by = 97;
         // byte自动类型转换为int
         i = by;
         System.out.println("byte自动类型转换为int(小->大)：" + i);
 
-        // 强制类型转换
+        // 强制类型转换：大字节变小字节只保留小字节能存储的位数。
         // 类型范围大的数据或者变量，不能直接赋值给类型范围小的变量，会报错！必须进行强制类型转换才可以。
-        i = 98;
+        // int      00000000 00000000 00000001 00000001
+        // byte                                00000001
+        i = 257;
         // int强制类型转换为byte
         // 强制类型转换格式：数据类型 变量 = (数据类型) 其他类型的数据变量
         by = (byte) i;

@@ -52,7 +52,15 @@ public class HelloWorld {
      * 配置环境变量(JAVA_HOME，Path)
      * JAVA_HOME => C:\Software\Programs\JDK\jdk1.8.0
      * Path => %JAVA_HOME%\bin
-     *
+     */
+    /**
+     * Java工程结构
+     * - Project（项目）：创建一个Project项目
+     * - Module（模块）：Project创建多个Module，一个项目中可以包含多个模块
+     * - Package（包）：Module创建多个Package，一个模块中可以有多个包
+     * - Class（类）：Package创建多个Class，一个包中可以包含多个类
+     */
+    /**
      * 开发Java程序
      * 需要三个步骤：编写代码，编译代码，运行代码
      *
@@ -80,6 +88,6 @@ public class HelloWorld {
          */
         // 单行注释示例
         // 它将输出 Hello World
-        // System.out.println("Hello World");
+        System.out.println("Hello World");
     }
 }
