@@ -32,57 +32,58 @@ public class SE_21_Collection {
      */
     public static void collection() {
         Collection<String> collection = new ArrayList<>();
-        //boolean add(E e)添加指定元素
+        Collection<String> collectionNew = new ArrayList<>();
+
+        // boolean add(E e)添加指定元素
         collection.add("张三");
         collection.add("李四");
         collection.add("王二");
         collection.add("麻子");
-        System.out.println(collection);//[张三, 李四, 王二, 麻子]
+        System.out.println(collection);// [张三, 李四, 王二, 麻子]
 
-        //boolean addAll(Collection<? extends E> c)添加指定集合所有元素
-        Collection<String> collectionNew = new ArrayList<>();
+        // boolean addAll(Collection<? extends E> c)添加指定集合所有元素
         collectionNew.addAll(collection);
-        System.out.println(collectionNew);//[张三, 李四, 王二, 麻子]
+        System.out.println(collectionNew);// [张三, 李四, 王二, 麻子]
 
-        //void clear()删除所有元素
-        //collectionNew.clear();
-        //System.out.println(collectionNew);//[]
+        // void clear()删除所有元素
+        // collectionNew.clear();
+        // System.out.println(collectionNew);// []
 
-        //boolean contains(Object o)判断是否存在指定的元素
-        System.out.println(collection);//[张三, 李四, 王二, 麻子]
-        System.out.println(collection.contains("张三"));//true
+        // boolean contains(Object o)判断是否存在指定的元素
+        System.out.println(collection);// [张三, 李四, 王二, 麻子]
+        System.out.println(collection.contains("张三"));// true
 
-        //boolean containsAll(Collection<?> c)判断是否存在指定集合中的所有元素
-        System.out.println(collection);//[张三, 李四, 王二, 麻子]
-        System.out.println(collectionNew);//[张三, 李四, 王二, 麻子]
-        System.out.println(collection.containsAll(collectionNew));//true
+        // boolean containsAll(Collection<?> c)判断是否存在指定集合中的所有元素
+        System.out.println(collection);// [张三, 李四, 王二, 麻子]
+        System.out.println(collectionNew);// [张三, 李四, 王二, 麻子]
+        System.out.println(collection.containsAll(collectionNew));// true
 
-        //boolean remove(Object o)删除指定元素
-        System.out.println(collection.remove("张三") + " " + collection);//true [李四, 王二, 麻子]
+        // boolean remove(Object o)删除指定元素
+        System.out.println(collection.remove("张三") + " " + collection);// true [李四, 王二, 麻子]
 
-        //boolean removeAll(Collection<?> c)删除指定集合相同的所有元素
-        //System.out.println(collectionNew);//[张三, 李四, 王二, 麻子]
-        //System.out.println(collection.removeAll(collectionNew) + " " + collection);//true []
+        // boolean removeAll(Collection<?> c)删除指定集合相同的所有元素
+        // System.out.println(collectionNew);// [张三, 李四, 王二, 麻子]
+        // System.out.println(collection.removeAll(collectionNew) + " " + collection);// true []
 
-        //default boolean removeIf(Predicate<? super E> filter)删除满足条件的所有元素
+        // default boolean removeIf(Predicate<? super E> filter)删除满足条件的所有元素
         System.out.println(collection.removeIf(new Predicate() {
             @Override
             public boolean test(Object o) {
                 return "李四".equals(o);
             }
-        }) + " " + collection);//true [王二, 麻子]
+        }) + " " + collection);// true [王二, 麻子]
 
-        //boolean retainAll(Collection<?> c)仅保留指定集合中的元素
-        System.out.println(collection);//[王二, 麻子]
-        System.out.println(collectionNew);//[张三, 李四, 王二, 麻子]
-        System.out.println(collectionNew.retainAll(collection) + " " + collectionNew);//true [王二, 麻子]
+        // boolean retainAll(Collection<?> c)仅保留指定集合中的元素
+        System.out.println(collection);// [王二, 麻子]
+        System.out.println(collectionNew);// [张三, 李四, 王二, 麻子]
+        System.out.println(collectionNew.retainAll(collection) + " " + collectionNew);// true [王二, 麻子]
 
-        //int size()返回此集合中的元素个数
-        System.out.println(collection.size());//2
-        System.out.println(collectionNew.size());//2
+        // int size()返回此集合中的元素个数
+        System.out.println(collection.size());// 2
+        System.out.println(collectionNew.size());// 2
 
-        //Object[] toArray()返回包含此集合中所有元素的数组
-        System.out.println(Arrays.toString(collection.toArray()));//[王二, 麻子]
+        // Object[] toArray()返回包含此集合中所有元素的数组
+        System.out.println(Arrays.toString(collection.toArray()));// [王二, 麻子]
     }
 
     /**
@@ -94,42 +95,42 @@ public class SE_21_Collection {
         collection.add("李四");
         collection.add("王二");
         collection.add("麻子");
-        // 使用迭代器方法遍历集合，迭代器在Java中的代表是Iterator，迭代器是集合的专用的遍历方式。
-        // 获取迭代器对象，调用collection.iterator()返回此集合中元素的迭代器，该迭代器对象默认指向当前集合的[0]索引
+        //  使用迭代器方法遍历集合，迭代器在Java中的代表是Iterator，迭代器是集合的专用的遍历方式。
+        //  获取迭代器对象，调用collection.iterator()返回此集合中元素的迭代器，该迭代器对象默认指向当前集合的[0]索引
         Iterator<String> iterator = collection.iterator();
-        // 调用iterator.next()方法之前必须调用iterator.hasNext()判断是否还有元素
-        // 如果不判断，迭代器取元素越界会出现 NoSuchElementException异常
+        //  调用iterator.next()方法之前必须调用iterator.hasNext()判断是否还有元素
+        //  如果不判断，迭代器取元素越界会出现 NoSuchElementException异常
         while (iterator.hasNext()) {
-            // 调用iterator.next()，获取当前位置的元素，然后自动指向下一个元素.
+            //  调用iterator.next()，获取当前位置的元素，然后自动指向下一个元素.
             String next = iterator.next();
             if ("张三".equals(next)) {
-                // 调用iterator.remove()从底层集合中移除此迭代器返回的最后一个元素
+                //  调用iterator.remove()从底层集合中移除此迭代器返回的最后一个元素
                 iterator.remove();
             }
         }
-        System.out.println(collection); //[李四, 王二, 麻子]
+        System.out.println(collection); // [李四, 王二, 麻子]
 
-        // 增强for循环就是简化的迭代器iterator，源码调用迭代器方法遍历
+        //  增强for循环就是简化的迭代器iterator，源码调用迭代器方法遍历
         for (String str : collection) {
-            // 修改变量(str)的值不会影响到集合中的元素，因为算是一个复制品，所以循环通常只能遍历数组
+            //  修改变量(str)的值不会影响到集合中的元素，因为算是一个复制品，所以循环通常只能遍历数组
             System.out.println(str);
             if ("李四".equals(str)) {
                 str = "法外狂徒";
             }
         }
-        System.out.println(collection); //[李四, 王二, 麻子]
+        System.out.println(collection); // [李四, 王二, 麻子]
 
-        // 得益于JDK8开始的新技术Lambda表达式，提供了一种更简单，更直接的遍历集合的方式。
-        // 调用方法实现接口遍历
+        //  得益于JDK8开始的新技术Lambda表达式，提供了一种更简单，更直接的遍历集合的方式。
+        //  调用方法实现接口遍历
         collection.forEach(new Consumer<String>() {
             @Override
             public void accept(String s) {
                 System.out.println(s);
             }
         });
-        // lambda表达式
+        //  lambda表达式
         collection.forEach(s -> System.out.println(s));
-        // 简化形式
+        //  简化形式
         collection.forEach(System.out::println);
     }
 
@@ -149,36 +150,36 @@ public class SE_21_Collection {
         collection.add("麻子");
         List<String> list = new ArrayList<>();
 
-        //void add(int index, E element)添加指定元素到指定位置
+        // void add(int index, E element)添加指定元素到指定位置
         list.add(0, "张三");
-        System.out.println(list);//[张三]
+        System.out.println(list);// [张三]
 
-        //boolean addAll(int index, Collection<? extends E> c)添加指定集合所有元素到指定位置
-        System.out.println(list.addAll(1, collection));//true
-        System.out.println(list);//[张三, 张三, 李四, 王二, 麻子]
+        // boolean addAll(int index, Collection<? extends E> c)添加指定集合所有元素到指定位置
+        System.out.println(list.addAll(1, collection));// true
+        System.out.println(list);// [张三, 张三, 李四, 王二, 麻子]
 
-        //E get(int index)返回指定位置的元素
-        System.out.println(list.get(2));//李四
-        System.out.println(list);//[张三, 张三, 李四, 王二, 麻子]
+        // E get(int index)返回指定位置的元素
+        System.out.println(list.get(2));// 李四
+        System.out.println(list);// [张三, 张三, 李四, 王二, 麻子]
 
-        //int indexOf(Object o)返回指定元素第一次出现的位置
-        System.out.println(list.indexOf("张三"));//0
-        System.out.println(list);//[张三, 张三, 李四, 王二, 麻子]
+        // int indexOf(Object o)返回指定元素第一次出现的位置
+        System.out.println(list.indexOf("张三"));// 0
+        System.out.println(list);// [张三, 张三, 李四, 王二, 麻子]
 
-        //int lastIndexOf(Object o)返回指定元素最后一次出现的位置
-        System.out.println(list.lastIndexOf("张三"));//1
-        System.out.println(list);//[张三, 张三, 李四, 王二, 麻子]
+        // int lastIndexOf(Object o)返回指定元素最后一次出现的位置
+        System.out.println(list.lastIndexOf("张三"));// 1
+        System.out.println(list);// [张三, 张三, 李四, 王二, 麻子]
 
-        //E remove(int index)删除指定位置的元素
-        System.out.println("删除：" + list.remove(1));//删除：张三
-        System.out.println(list);//[张三, 李四, 王二, 麻子]
+        // E remove(int index)删除指定位置的元素
+        System.out.println("删除：" + list.remove(1));// 删除：张三
+        System.out.println(list);// [张三, 李四, 王二, 麻子]
 
-        //E set(int index, E element)将指定位置的元素替换为指定元素
-        System.out.println("替换：" + list.set(0, "法外狂徒"));//替换：张三
-        System.out.println(list);//[法外狂徒, 李四, 王二, 麻子]
+        // E set(int index, E element)将指定位置的元素替换为指定元素
+        System.out.println("替换：" + list.set(0, "法外狂徒"));// 替换：张三
+        System.out.println(list);// [法外狂徒, 李四, 王二, 麻子]
 
-        //List<E> subList(int fromIndex, int toIndex)返回起始位置到结束位置的所有元素
-        List<String> listNew = list.subList(1, 3);//[李四, 王二]
+        // List<E> subList(int fromIndex, int toIndex)返回起始位置到结束位置的所有元素
+        List<String> listNew = list.subList(1, 3);// [李四, 王二]
         System.out.println(listNew);
     }
 
@@ -199,7 +200,7 @@ public class SE_21_Collection {
         list.add("王二");
         list.add("麻子");
 
-        //for循环(因为List集合存在索引)
+        // for循环(因为List集合存在索引)
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
@@ -216,11 +217,11 @@ public class SE_21_Collection {
      * - 扩容实际是给Object[] elementData对象数组重新赋值，elementData = Arrays.copyOf(elementData, newCapacity);
      */
     public static void arrayList() {
-        // 创建默认ArrayList集合
+        //  创建默认ArrayList集合
         ArrayList<String> arrayList = new ArrayList<>();
-        // 指定长度创建ArrayList集合
+        //  指定长度创建ArrayList集合
         ArrayList<String> arrayList_1 = new ArrayList<>(10);
-        // 使用集合创建ArrayList集合
+        //  使用集合创建ArrayList集合
         ArrayList<String> arrayList_2 = new ArrayList<>(arrayList);
     }
 
@@ -234,11 +235,11 @@ public class SE_21_Collection {
      * - 扩容实际是给Object[] elementData对象数组重新赋值，elementData = Arrays.copyOf(elementData, newCapacity);
      */
     public static void vector() {
-        //创建默认Vector集合
+        // 创建默认Vector集合
         Vector<String> vector = new Vector<>();
-        //指定长度创建Vector集合
+        // 指定长度创建Vector集合
         Vector<String> vector_1 = new Vector<>(10);
-        //使用集合创建Vector集合
+        // 使用集合创建Vector集合
         Vector<String> vector_2 = new Vector<>(vector);
     }
 
@@ -257,44 +258,44 @@ public class SE_21_Collection {
         list.add("王二");
         list.add("麻子");
 
-        //创建默认LinkedList集合
+        // 创建默认LinkedList集合
         LinkedList<String> linkedList = new LinkedList<>();
-        //按照集合顺序创建LinkedList集合
+        // 按照集合顺序创建LinkedList集合
         LinkedList<String> linkedListNew = new LinkedList<>(list);
-        System.out.println(linkedListNew);//[张三, 李四, 王二, 麻子]
+        System.out.println(linkedListNew);// [张三, 李四, 王二, 麻子]
 
-        //LinkedList方法
-        //void addFirst(E e)在此列表的开头插入指定的元素
+        // LinkedList方法
+        // void addFirst(E e)在此列表的开头插入指定的元素
         linkedListNew.addFirst("法外狂徒");
-        System.out.println(linkedListNew);//[法外狂徒, 张三, 李四, 王二, 麻子]
+        System.out.println(linkedListNew);// [法外狂徒, 张三, 李四, 王二, 麻子]
 
-        //void addLast(E e) 将指定的元素追加到此列表的末尾
+        // void addLast(E e) 将指定的元素追加到此列表的末尾
         linkedListNew.addLast("赵六");
-        System.out.println(linkedListNew);//[法外狂徒, 张三, 李四, 王二, 麻子, 赵六]
+        System.out.println(linkedListNew);// [法外狂徒, 张三, 李四, 王二, 麻子, 赵六]
 
-        //E getFirst()返回此列表中的第一个元素
-        System.out.println(linkedListNew.getFirst());//法外狂徒
-        System.out.println(linkedListNew);//[法外狂徒, 张三, 李四, 王二, 麻子, 赵六]
+        // E getFirst()返回此列表中的第一个元素
+        System.out.println(linkedListNew.getFirst());// 法外狂徒
+        System.out.println(linkedListNew);// [法外狂徒, 张三, 李四, 王二, 麻子, 赵六]
 
-        //E getLast()返回此列表中的最后一个元素
-        System.out.println(linkedListNew.getLast());//赵六
-        System.out.println(linkedListNew);//[法外狂徒, 张三, 李四, 王二, 麻子]
+        // E getLast()返回此列表中的最后一个元素
+        System.out.println(linkedListNew.getLast());// 赵六
+        System.out.println(linkedListNew);// [法外狂徒, 张三, 李四, 王二, 麻子]
 
-        //E removeFirst()从此列表中删除并返回第一个元素
-        System.out.println(linkedListNew.removeFirst());//法外狂徒
-        System.out.println(linkedListNew);//[张三, 李四, 王二, 麻子, 赵六]
+        // E removeFirst()从此列表中删除并返回第一个元素
+        System.out.println(linkedListNew.removeFirst());// 法外狂徒
+        System.out.println(linkedListNew);// [张三, 李四, 王二, 麻子, 赵六]
 
-        //E removeLast()从此列表中删除并返回最后一个元素
-        System.out.println(linkedListNew.removeLast());//赵六
-        System.out.println(linkedListNew);//[张三, 李四, 王二, 麻子]
+        // E removeLast()从此列表中删除并返回最后一个元素
+        System.out.println(linkedListNew.removeLast());// 赵六
+        System.out.println(linkedListNew);// [张三, 李四, 王二, 麻子]
 
-        //E pop()弹出此列表所代表的堆栈中的元素
-        System.out.println(linkedListNew.pop());//张三
-        System.out.println(linkedListNew);//[李四, 王二, 麻子]
+        // E pop()弹出此列表所代表的堆栈中的元素
+        System.out.println(linkedListNew.pop());// 张三
+        System.out.println(linkedListNew);// [李四, 王二, 麻子]
 
-        //void push(E e)将元素推送到此列表所表示的堆栈上
+        // void push(E e)将元素推送到此列表所表示的堆栈上
         linkedListNew.push("法外狂徒");
-        System.out.println(linkedListNew);//[法外狂徒, 李四, 王二, 麻子]
+        System.out.println(linkedListNew);// [法外狂徒, 李四, 王二, 麻子]
     }
 
     /**
@@ -320,13 +321,13 @@ public class SE_21_Collection {
      * - HashSet存储元素是无序的，但取出元素顺序是有序的，哈希表的索引是根据元素的哈希值确定的。
      */
     public static void hashSet() {
-        //创建默认HashSet集合
+        // 创建默认HashSet集合
         HashSet<String> hashSet = new HashSet<>();
-        //指定初始容量创建HashSet集合
+        // 指定初始容量创建HashSet集合
         HashSet<String> hashSet_1 = new HashSet<>(16);
-        //指定初始容量和加载因子创建HashSet集合
+        // 指定初始容量和加载因子创建HashSet集合
         HashSet<String> hashSet_2 = new HashSet<>(16, 0.75f);
-        //使用集合创建HashSet集合
+        // 使用集合创建HashSet集合
         HashSet<String> hashSet_3 = new HashSet<>(hashSet);
     }
 
@@ -340,13 +341,13 @@ public class SE_21_Collection {
      * - 原理：底层数据结构是依然哈希表，只是每个元素又额外的多了一个双向链表的机制记录存储的顺序。
      */
     public static void linkedHashSet() {
-        //创建默认LinkedHashSet集合
+        // 创建默认LinkedHashSet集合
         LinkedHashSet<String> linkedHashSet = new LinkedHashSet<>();
-        //指定初始容量创建LinkedHashSet集合
+        // 指定初始容量创建LinkedHashSet集合
         LinkedHashSet<String> linkedHashSet_1 = new LinkedHashSet<>(16);
-        //指定初始容量和加载因子创建LinkedHashSet集合
+        // 指定初始容量和加载因子创建LinkedHashSet集合
         LinkedHashSet<String> linkedHashSet_2 = new LinkedHashSet<>(16, 0.75f);
-        //使用集合创建LinkedHashSet集合
+        // 使用集合创建LinkedHashSet集合
         LinkedHashSet<String> linkedHashSet_3 = new LinkedHashSet<>(linkedHashSet);
     }
 
@@ -372,13 +373,13 @@ public class SE_21_Collection {
      * - 注意：如果TreeSet集合存储的对象有实现比较规则，集合也自带比较器，默认使用集合自带的比较器排序。
      */
     public static void treeSet() {
-        //创建默认TreeSet集合
+        // 创建默认TreeSet集合
         TreeSet<String> treeSet = new TreeSet<>();
-        //使用集合创建TreeSet集合,默认排序规则
+        // 使用集合创建TreeSet集合,默认排序规则
         TreeSet<String> treeSet_1 = new TreeSet<>(treeSet);
-        //创建TreeSet集合并且指定排序规则
+        // 创建TreeSet集合并且指定排序规则
         TreeSet<String> treeSet_2 = new TreeSet<>((o1, o2) -> 0);
-        //使用指定集合创建新的TreeSet集合,使用指定集合的排序规则
+        // 使用指定集合创建新的TreeSet集合,使用指定集合的排序规则
         TreeSet<String> treeSet_3 = new TreeSet<>(treeSet);
     }
 
@@ -387,41 +388,41 @@ public class SE_21_Collection {
      */
     public static void collections() {
         List<String> list = new ArrayList<>();
-        //static <T> boolean addAll(Collection<? super T> c, T... elements)将所有指定元素添加到指定集合
+        // static <T> boolean addAll(Collection<? super T> c, T... elements)将所有指定元素添加到指定集合
         Collections.addAll(list, "张三", "李四", "王二", "麻子", "赵六", "钱七");
         System.out.println("Collections.addAll：" + list);
 
-        //static <T> void copy(List<? super T> dest, List<? extends T> src)复制List集合所有元素
+        // static <T> void copy(List<? super T> dest, List<? extends T> src)复制List集合所有元素
         Vector<String> vector = new Vector<>();
         vector.add("法外狂徒");
-        //是替换不是追加，所以需要 src.Size() > dest.size()
+        // 是替换不是追加，所以需要 src.Size() > dest.size()
         Collections.copy(list, vector);
         System.out.println("list：" + list);
         System.out.println("vector：" + vector);
 
-        //static boolean disjoint(Collection<T> c1, Collection<T> c2)如果两个指定集合没有共同元素，则返回true
+        // static boolean disjoint(Collection<T> c1, Collection<T> c2)如果两个指定集合没有共同元素，则返回true
         System.out.println(Collections.disjoint(list, vector));
         System.out.println("list：" + list);
         System.out.println("vector：" + vector);
 
-        //static <T> boolean replaceAll(List<T> list, T oldVal, T newVal)替换List集合所有指定值
+        // static <T> boolean replaceAll(List<T> list, T oldVal, T newVal)替换List集合所有指定值
         System.out.println("list替换前：" + list);
         System.out.println(Collections.replaceAll(list, "法外狂徒", "张三"));
         System.out.println("list替换后：" + list);
 
-        //static void reverse(List<?> list)反转List集合元素的顺序
+        // static void reverse(List<?> list)反转List集合元素的顺序
         Collections.reverse(list);
         System.out.println("list反转后：" + list);
 
-        //static void shuffle(List<?> list)打乱List集合元素的顺序
+        // static void shuffle(List<?> list)打乱List集合元素的顺序
         Collections.shuffle(list);
         System.out.println("list打乱后：" + list);
 
-        //static <T extends Comparable<? super T>> void sort(List<T> list)List集合默认规则排序
+        // static <T extends Comparable<? super T>> void sort(List<T> list)List集合默认规则排序
         Collections.sort(list);
         System.out.println("list默认排序后：" + list);
 
-        //static <T> void sort(List<T> list, Comparator<? super T> c)List集合自定义规则排序
+        // static <T> void sort(List<T> list, Comparator<? super T> c)List集合自定义规则排序
         Collections.sort(list, new Comparator<String>() {
             @Override
             public int compare(String o1, String o2) {
@@ -430,7 +431,7 @@ public class SE_21_Collection {
         });
         System.out.println("list自定义排序后：" + list);
 
-        //static void swap(List<?> list, int i, int j)交换List集合指定位置的元素
+        // static void swap(List<?> list, int i, int j)交换List集合指定位置的元素
         Collections.swap(list, 0, 5);
         System.out.println("list交换后：" + list);
     }

@@ -5,17 +5,17 @@ import java.util.Arrays;
 public class SE_04_Array {
 
     public static void main(String[] args) {
-        array();
-        ergodic();
-        bubbleSort();
-        twoArray();
+        // array();
+        // ergodic();
+        // bubbleSort();
+        // twoArray();
     }
 
     /**
      * 数组
      * - 数组就是用来存储一批同种类型数据的容器，数组也是一种数据类型对象是(object)，是引用类型。
      * - 数组中的元素可以是任何数据类型，包括基本类型和引用类型，但是不能混用，下标是从0开始的。
-     * - 数组初始化必须指定类型和长度，一旦定义出来就不能更改，程序执行的过程中长度和类型是固定的
+     * - 数组初始化必须指定类型和长度，一旦定义出来就不能更改，因为程序执行过程中长度和类型是固定的
      */
     public static void array() {
         // 注意：数组变量名中存储的是数组在内存中的地址，数组是引用类型。
@@ -33,6 +33,7 @@ public class SE_04_Array {
         // 数组的动态初始化：定义数组的时候只确定元素的类型和数组的长度，之后再存入具体数据，有长度，没有元素(存在默认值)
         // 数据类型[] 数组名 = new 数据类型[长度];
         int[] autoArr = new int[10];
+        // 数组赋值
         autoArr[0] = 10;
 
         // 数组基本属性

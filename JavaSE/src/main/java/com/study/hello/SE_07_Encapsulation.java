@@ -35,13 +35,13 @@ public class SE_07_Encapsulation {
  * - 必须提供一个无参构造器，有参数构造器是可写可不写的。
  * - 实体类只负责数据存取，不参与数据处理，实现数据和数据业务处理相分离。
  */
-class Bean {
+class Encapsulation_Bean {
+
     private String name;
 
-    public Bean() {
-    }
+    public Encapsulation_Bean() {}
 
-    public Bean(String name) {
+    public Encapsulation_Bean(String name) {
         this.name = name;
     }
 

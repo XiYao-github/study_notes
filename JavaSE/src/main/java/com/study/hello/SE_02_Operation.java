@@ -12,11 +12,13 @@ public class SE_02_Operation {
     static boolean bool;
 
     public static void main(String[] args) {
-        arithmetic();
-        relational();
-        logic();
-        assignment();
+        // arithmetic();
+        // relational();
+        // logic();
+        // assignment();
         condition();
+        // priority();
+        // position();
     }
 
     /**
@@ -95,17 +97,13 @@ public class SE_02_Operation {
     public static void relational() {
         //判断是否满足条件的，返回true和false
         bool = age >= 18;
-        System.out.println(bool);
-
-        //以下代码是另一种写法形式
-        bool = age >= 18;
-        System.out.println(bool);
+        System.out.println("age >= 18 = " + bool);
 
         //如果运算符左侧变量所指的对象，是操作符右侧类或接口(class/interface)的一个对象，那么结果为真。
         str = "instanceof";
         bool = str instanceof String;
         //由于str是String类型，所以返回真
-        System.out.println(bool);
+        System.out.println("str instanceof String = " + bool);
     }
 
     /**
@@ -166,23 +164,23 @@ public class SE_02_Operation {
      */
     public static void assignment() {
         i = 5;
-        i += 5; // 等价 i = i + 5; // 10
         System.out.printf("初始值：i = %d;\n", i);
+        i += 5; // 等价 i = i + 5; // 10
         System.out.printf("i += 5 = %d => i = i + 5\n", i);
         System.out.println();
 
         j = 5;
         d = 5.0;
-        j += d; // 等价 b = (byte)(b + 2); // 10
-        System.out.println("复合赋值运算符自带强制类型转换");
         System.out.printf("初始值：j = %d; d = %.1f;\n", j, d);
+        System.out.println("复合赋值运算符自带强制类型转换");
+        j += d; // 等价 j = (int)(d + 5); // 10
         System.out.printf("j += d = %d => j = (int)(j + d)\n", j);
         System.out.println();
 
         d = 5.0;
-        d++; //等价 b = (byte)(b+1); // 6
-        System.out.println("自增自减自带赋值符号所以也有强制类型转换");
         System.out.printf("初始值：d = %.1f;\n", d);
+        System.out.println("自增自减自带赋值符号所以也有强制类型转换");
+        d++; //等价 d = (double)(d+1); // 6
         System.out.printf("d++ = %.1f => d = (double)(b + 1)\n", d);
     }
 
@@ -196,19 +194,22 @@ public class SE_02_Operation {
     public static void condition() {
         k = 10;
         d = 5.0;
-        bool = k > d;
-        obj = bool ? k : d;
         System.out.printf("初始值：k = %d; d = %f;\n", k, d);
-        System.out.println("obj = k > d ? k : d ");
+        bool = k > d;
         System.out.println("k > d = " + bool);
+
         System.out.println("因为三元运算符是一个整体，相当于一个表达式运算，所以最后提高了结果的精度");
-        bool = obj instanceof Double;
+        obj = bool ? k : d;
+        System.out.println("obj = k > d ? (int)k : (double)d ");
+        System.out.println("(int)k 大于 (double)d 但是结果变成了 (double)k");
         System.out.println("obj instanceof Double => " + bool);
+        bool = obj instanceof Double;
         System.out.println("obj = " + obj);
     }
 
     /**
      * 运算符优先级
+     * - 实际开发中，很少考虑运算优先级，优先计算加()就可以了，这样阅读性更高
      */
     public static void priority() {
         /*

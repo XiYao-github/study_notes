@@ -11,12 +11,15 @@ import java.util.Arrays;
  * - String类因为使用频繁，所以使用字符串常量池来存储字符串常量对象，字符串常量对象是用双引号括起来的字符序列。
  * - String类保存的是字符串常量对象，字符串内容的修改实际上是切换不同字符串常量对象。
  * - String对象的内容不可改变，被称为不可变字符串对象。
- * - 只要是以“...”方式写出的字符串对象，会存储到字符串常量池，且相同内容的字符串只存储一份；
- * - 但通过new方式创建字符串对象，每new一次都会产生一个新的对象放在堆内存中。
+ * - 只要是以"..."方式写出的字符串对象，会存储到字符串常量池(堆内存)，且相同内容的字符串只存储一份。
  */
 public class SE_18_String {
+
     public static void main(String[] args) {
-        string();
+        // string();
+        // stringMethod();
+        // regex();
+        // str();
     }
 
     /**
@@ -26,68 +29,70 @@ public class SE_18_String {
      * - String(String original)根据字符串的内容，来创建新的String
      */
     public static void string() {
-        //value[]指向的地址值不能更改
+        // String类有属性 private final char value[];
         final char[] value = {'h', 'e', 'l', 'l', 'o', '!'};
-        //final char[] valueNew = {'w', 'o', 'r', 'l', 'd', '!'};
-        //value = valueNew;//错误
-        //value[]里的值可以修改
+        final char[] valueNew = {'w', 'o', 'r', 'l', 'd', '!'};
+        // value = valueNew;// value[]指向的地址值不能更改，所以错误
+        // 但是 value[] 的内容可以修改，没有改变变量地址，但是改变了变量地址的内容
         value[5] = '.';
         System.out.println(value);
 
-        //创建一个String对象
-        //name指向常量池内容为"张三"的字符串常量对象
+        // 创建一个String对象
+        // name指向常量池内容为"张三"的字符串常量对象
         String name = "张三";
-        //name指向常量池内容为"张三还在"的字符串常量对象
+        // name指向常量池内容为"张三还在"的字符串常量对象
         name += "还在";
-        //name指向常量池内容为"张三还在睡觉"的字符串常量对象
+        // name指向常量池内容为"张三还在睡觉"的字符串常量对象
         name += "睡觉";
-        //输出："张三还在睡觉"
+        // 输出："张三还在睡觉"
         System.out.println(name);
 
-        //创建字符串对象
-        //方式一：直接使用""定义。(推荐方式)
-        //查找常量池是否存在该字符串,如果存在,字符串变量直接指向该字符串常量对象
-        //如果不存在,在常量池创建该字符串常量对象,然后将字符串变量指向该字符串常量对象
+        // 创建字符串对象
+        // 方式一：直接使用""定义(推荐方式)
+        // 查找常量池是否存在该字符串,如果存在,字符串变量直接指向该字符串常量对象
+        // 如果不存在,在常量池创建该字符串常量对象,然后将字符串变量指向该字符串常量对象
         String s1 = "abc";
         String s2 = "abc";
-        //比较的是常量池字符串的地址
-        System.out.println(s1 == s2);   //true
-        //方式二：通过String类的构造器创建对象
-        //先在堆中创建String对象,对象中维护了private final char value[];
-        //查找常量池是否存在该字符串,如果存在,String对象的value[]指向该字符串常量对象的value[]
-        //如果不存在,在常量池创建该字符串常量对象,然后将String对象的value[]指向该字符串常量对象的value[]
+        // 比较的是常量池字符串的地址
+        System.out.println(s1 == s2);// true
+
+        // 方式二：通过String类的构造器创建对象
+        // 先在堆中创建String对象,对象中维护了private final char value[];
+        // 查找常量池是否存在该字符串,如果存在,String对象的value[]指向该字符串常量对象的value[]
+        // 如果不存在,在常量池创建该字符串常量对象,然后将String对象的value[]指向该字符串常量对象的value[]
         String s3 = new String("abc");
         String s4 = new String("abc");
-        //比较的是String在堆中的地址
-        System.out.println(s3 == s4);   //false
-        //intern() 返回对象value[]的地址
-        //比较的是String对象在堆中value[]属性中的地址
-        System.out.println(s3.intern() == s4.intern());   //true
+        // 比较的是String在堆中的地址
+        System.out.println(s3 == s4);// false
+        // intern() 返回对象value[]的地址
+        // 比较的是String对象在堆中value[]属性中的地址
+        System.out.println(s3.intern() == s4.intern());// true
 
-        //字符串内容比较
-        String str1 = new String("abc"); //这行代码创建了2个对象
-        String str2 = "abc";//导致这行代码创建了0个对象
-        System.out.println(str1 == str2);   //false
-        System.out.println(str1.intern() == str2);  //true
+        // 字符串内容比较
+        String str1 = new String("abc");// 这行代码创建了2个对象
+        String str2 = "abc";// 导致这行代码创建了0个对象
+        System.out.println(str1 == str2);   // false
+        System.out.println(str1.intern() == str2);  // true
 
         String str3 = "abc";
         String str4 = "ab";
-        //字符串变量和变量(常量)拼接流程
-        //先创建一个空的StringBuilder()对象,依次执行append()，拼接每一个变量(常量)的字符串内容
-        //拼接完后的StringBuilder对象查找常量池是否存在相同内容的字符串,没有则创建该字符串
-        //最后StringBuilder对象调用toString(),返回一个堆中新的String对象
-        //String对象的value[]指向拼接完后(创建)的字符串常量对象的value[]
+        // 字符串变量和变量(常量)拼接流程
+        // 先创建一个空的StringBuilder()对象,依次执行append()，拼接每一个变量(常量)的字符串内容
+        // 拼接完后的StringBuilder对象查找常量池是否存在相同内容的字符串,没有则创建该字符串
+        // 最后StringBuilder对象调用toString(),返回一个堆中新的String对象
+        // String对象的value[]指向拼接完后(创建)的字符串常量对象的value[]
         String str5 = str4 + "c";
-        System.out.println(str3 == str5);   //false
-        System.out.println(str3 == str5.intern());  //true
+        System.out.println(str3 == str5);// false
+        System.out.println(str3 == str5.intern());// true
 
         String str6 = "abc";
-        //Java存在编译优化机制,程序在编译时：“a”+“b”+“c”会直接转成"abc"
+        // Java存在编译优化机制,程序在编译时："a"+"b"+"c"会直接转成"abc"
         String str7 = "a" + "b" + "c";
-        System.out.println(str6 == str7);   //true
+        System.out.println(str6 == str7);// true
     }
 
     /**
+     * 常见字符集
      * - public static final Charset US_ASCII = Charset.forName("US-ASCII");
      * - public static final Charset ISO_8859_1 = Charset.forName("ISO-8859-1");
      * - public static final Charset UTF_8 = Charset.forName("UTF-8");
@@ -99,111 +104,110 @@ public class SE_18_String {
         String str = "hello world ";
         String str1 = "hello world";
         String str2 = "Hello World";
-        //char charAt(int index)返回指定索引处的char值
-        System.out.println(str.charAt(0));//h
+        // char charAt(int index)返回指定索引处的char值
+        System.out.println(str.charAt(0));// h
 
-        //int length()返回字符串长度
-        System.out.println(str.length());//12
+        // int length()返回字符串长度
+        System.out.println(str.length());// 12
 
-        //String trim()返回忽略前后空白的字符串副本
-        System.out.println(str.trim().length());//11
+        // String trim()返回忽略前后空白的字符串副本
+        System.out.println(str.trim().length());// 11
 
-        //String toLowerCase()将字符串单词全部转换为小写
-        System.out.println(str.toLowerCase());
+        // String toLowerCase()将字符串单词全部转换为小写
+        System.out.println(str.toLowerCase());// hello world
 
-        //String toUpperCase()将字符串单词全部转换为大写
-        System.out.println(str.toUpperCase());
+        // String toUpperCase()将字符串单词全部转换为大写
+        System.out.println(str.toUpperCase());// HELLO WORLD
 
-        //boolean equals(Object anObject)将指定字符串与指定对象进行比较
-        System.out.println(str1.equals(str2));//false
+        // boolean equals(Object anObject)将指定字符串与指定对象进行比较
+        System.out.println(str1.equals(str2));// false
 
-        //boolean equalsIgnoreCase(String anotherString)比较两个字符串,忽略大小写
-        System.out.println(str1.equalsIgnoreCase(str2));//true
+        // boolean equalsIgnoreCase(String anotherString)比较两个字符串,忽略大小写
+        System.out.println(str1.equalsIgnoreCase(str2));// true
 
-        //int compareTo(String anotherString)按字典顺序比较两个字符串
-        //如果前者大，则返回正数，后者大，则返回负数，如果相等，返回 0
-        //(1)如果长度相同，并且每个字符也相同，就返回 0
-        System.out.println(str.trim().compareTo(str1));//0
-        //(2)如果长度相同或者不相同，但是在进行比较时，可以区分大小，就返回
-        System.out.println(str1.compareTo(str2));//32
-        System.out.println('a' - 'A');//32
-        //(3)如果长度不相同,但相同长度内容相同，就返回 str1.len - str2.len
-        System.out.println(str.compareTo(str1)); //1
-        System.out.println(str.length() - str1.length()); //1
+        // int compareTo(String anotherString)按字典顺序比较两个字符串
+        // 如果前者大，则返回正数，后者大，则返回负数，如果相等，返回 0
+        // (1)如果长度相同，并且每个字符也相同，就返回 0
+        System.out.println(str.trim().compareTo(str1));// 0
+        // (2)如果长度相同或者不相同，但是在进行比较时，可以区分大小，就返回
+        System.out.println(str1.compareTo(str2));// 32
+        System.out.println('h' - 'H');// 32
+        // (3)如果长度不相同,但相同长度内容相同，就返回 str1.len - str2.len
+        System.out.println(str.compareTo(str1));// 1
+        System.out.println(str.length() - str1.length());// 1
 
-        //int compareToIgnoreCase(String str)按字典顺序比较两个字符串,忽略大小写
-        System.out.println(str1.compareToIgnoreCase(str2));//0
+        // int compareToIgnoreCase(String str)按字典顺序比较两个字符串,忽略大小写
+        System.out.println(str1.compareToIgnoreCase(str2));// 0
 
-        //byte[] getBytes(String charsetName)使用指定字符集将字符串转换为字节数组
-        byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
-        System.out.println(Arrays.toString(bytes));//[104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100]
+        // byte[] getBytes(String charsetName)使用指定字符集将字符串转换为字节数组
+        byte[] bytes = str1.getBytes(StandardCharsets.UTF_8);
+        System.out.println(Arrays.toString(bytes));// [104, 101, 108, 108, 111, 32, 119, 111, 114, 108, 100]
 
-        //char[] toCharArray()将字符串转换为字符数组
-        char[] chars = str.toCharArray();
-        System.out.println(Arrays.toString(chars));//[h, e, l, l, o,  , w, o, r, l, d]
+        // char[] toCharArray()将字符串转换为字符数组
+        char[] chars = str1.toCharArray();
+        System.out.println(Arrays.toString(chars));// [h, e, l, l, o,  , w, o, r, l, d]
 
-        //boolean contains(CharSequence s)判断是否包含指定的字符系列
-        System.out.println(str.contains("hello"));//true
+        // boolean contains(CharSequence s)判断是否包含指定的字符系列
+        System.out.println(str1.contains("hello"));// true
 
-        //boolean endsWith(String suffix)判断是否以指定字符串为后缀结束
-        System.out.println(str.endsWith("world"));//true
+        // boolean startsWith(String prefix)判断是否以指定字符串为前缀开始
+        System.out.println(str1.startsWith("hello"));// true
 
-        //boolean startsWith(String prefix)判断是否以指定字符串为前缀开始
-        System.out.println(str.startsWith("hello"));//true
+        // boolean startsWith(String prefix, int toffset)判断是否以指定字符串为前缀开始,从指定索引开始搜索
+        System.out.println(str1.startsWith("world", 6));// true
 
-        //boolean startsWith(String prefix, int toffset)判断是否以指定字符串为前缀开始,从指定索引开始搜索
-        System.out.println(str.startsWith("world", 6));//true
+        // boolean endsWith(String suffix)判断是否以指定字符串为后缀结束
+        System.out.println(str1.endsWith("world"));// true
 
-        //String substring(int beginIndex)截取开始索引到结束的字符子串判
-        System.out.println(str.substring(6));//world
+        // String substring(int beginIndex)截取开始索引到结束的字符子串判
+        System.out.println(str1.substring(6));// world
 
-        //String substring(int beginIndex, int endIndex)截取开始索引到结束索引的字符子串
-        //"hello world" -> [2,9) -> llo wor
-        System.out.println(str.substring(2, 9));//llo wor
+        // String substring(int beginIndex, int endIndex)截取开始索引到结束索引的字符子串
+        // "hello world" -> [2,9) -> llo wor
+        System.out.println(str.substring(2, 9));// llo wor
 
-        //static String format(String format, Object... args)格式化字符串
-        //占位符有: %s 字符串 %c 字符 %d 整型 %.2f 浮点型
+        // static String format(String format, Object... args)格式化字符串
+        // 占位符有: %s 字符串 %c 字符 %d 整型 %.2f 浮点型
         String name = "张三";
         int age = 10;
         double score = 66.579;
         char gender = '男';
-        //将所有的信息都拼接在一个字符串.
+        // 将所有的信息都拼接在一个字符串.
         String info = "我叫" + name + ",性别" + gender + ",今年" + age + "岁,期末考试成绩是" + score + "分！！！";
         System.out.println(info);
-        //1. %s , %d , %.2f %c 称为占位符,这些占位符由后面变量来替换
-        //2. %s 表示后面由 字符串来替换
-        //3. %c 使用 char 类型来替换
-        //4. %d 是整数来替换
-        //5. %.2f 表示使用小数来替换，替换后，只会保留小数点两位, 并且进行四舍五入的处理
-        String formatStr = "我叫%s,性别%c,今年%d岁,期末考试成绩是%.2f分！！！";
-        String format = String.format(formatStr, name, gender, age, score);
+        // 1. %s , %d , %.2f %c 称为占位符,这些占位符由后面变量来替换
+        // 2. %s 表示后面由 字符串来替换
+        // 3. %c 使用 char 类型来替换
+        // 4. %d 是整数来替换
+        // 5. %.2f 表示使用小数来替换，替换后，只会保留小数点两位, 并且进行四舍五入的处理
+        String format = String.format("我叫%s,性别%c,今年%d岁,期末考试成绩是%.2f分！！！", name, gender, age, score);
         System.out.println(format);
 
         System.out.println("-------------------");
         String string = "hello hello";
-        //int indexOf(int ch)返回指定字符第一次出现的索引
-        System.out.println(string.indexOf('o'));//4
+        // int indexOf(int ch)返回指定字符第一次出现的索引
+        System.out.println(string.indexOf('o'));// 4
 
-        //int indexOf(int ch, int fromIndex)返回指定字符第一次出现的索引,从指定的索引开始搜索
-        System.out.println(string.indexOf('o', string.indexOf('o') + 1));//10
+        // int indexOf(int ch, int fromIndex)返回指定字符第一次出现的索引,从指定的索引开始搜索
+        System.out.println(string.indexOf('o', string.indexOf('o') + 1));// 10
 
-        //int indexOf(String str)返回指定字符串第一次出现的索引
-        System.out.println(string.indexOf("llo"));//2
+        // int indexOf(String str)返回指定字符串第一次出现的索引
+        System.out.println(string.indexOf("llo"));// 2
 
-        //int indexOf(String str, int fromIndex)返回指定字符串第一次出现的索引,从指定的索引开始搜索
-        System.out.println(string.indexOf("llo", string.indexOf("llo") + 1));//8
+        // int indexOf(String str, int fromIndex)返回指定字符串第一次出现的索引,从指定的索引开始搜索
+        System.out.println(string.indexOf("llo", string.indexOf("llo") + 1));// 8
 
-        //int lastIndexOf(int ch)返回指定字符最后一次出现的索引
-        System.out.println(string.lastIndexOf('o'));//10
+        // int lastIndexOf(int ch)返回指定字符最后一次出现的索引
+        System.out.println(string.lastIndexOf('o'));// 10
 
-        //int lastIndexOf(int ch, int fromIndex)返回指定字符最后一次出现的索引,从指定的索引开始反向搜索
-        System.out.println(string.lastIndexOf('o', string.lastIndexOf('o') - 1));//4
+        // int lastIndexOf(int ch, int fromIndex)返回指定字符最后一次出现的索引,从指定的索引开始反向搜索
+        System.out.println(string.lastIndexOf('o', string.lastIndexOf('o') - 1));// 4
 
-        //int lastIndexOf(String str)返回指定字符串最后一次出现的索引
-        System.out.println(string.lastIndexOf("llo"));//8
+        // int lastIndexOf(String str)返回指定字符串最后一次出现的索引
+        System.out.println(string.lastIndexOf("llo"));// 8
 
-        //int lastIndexOf(String str, int fromIndex)返回指定字符串最后一次出现的索引,从指定的索引开始反向搜索
-        System.out.println(string.lastIndexOf("llo", string.lastIndexOf("llo") - 1));//2
+        // int lastIndexOf(String str, int fromIndex)返回指定字符串最后一次出现的索引,从指定的索引开始反向搜索
+        System.out.println(string.lastIndexOf("llo", string.lastIndexOf("llo") - 1));// 2
     }
 
     /**
@@ -288,29 +292,29 @@ public class SE_18_String {
     public static void str() {
         StringBuffer stringBuffer = new StringBuffer("hello");
 
-        //StringBuffer append(String str)追加指定字符串
-        System.out.println(stringBuffer.append(",world").append("!?!"));//hello,world!?!
+        // StringBuffer append(String str)追加指定字符串
+        System.out.println(stringBuffer.append(",world").append("!?!"));// hello,world!?!
 
-        //StringBuffer delete(int start, int end)删除指定索引 start 到 end 之前的所有字符
-        //索引从0开始，删除索引[11, 14)的字符 -> "!?!"
-        System.out.println(stringBuffer.delete(11, 14));//hello,world
+        // StringBuffer delete(int start, int end)删除指定索引 start 到 end 之前的所有字符
+        // 索引从0开始，删除索引[11, 14)的字符 -> "!?!"
+        System.out.println(stringBuffer.delete(11, 14));// hello,world
 
-        //StringBuffer deleteCharAt(int index)删除指定索引处的字符
-        //索引从0开始，删除索引 5 的字符 -> ","
-        System.out.println(stringBuffer.deleteCharAt(5));//helloworld
+        // StringBuffer deleteCharAt(int index)删除指定索引处的字符
+        // 索引从0开始，删除索引 5 的字符 -> ","
+        System.out.println(stringBuffer.deleteCharAt(5));// helloworld
 
-        //StringBuffer insert(int offset, String str)指定索引处插入指定字符串，其余内容后移
-        System.out.println(stringBuffer.insert(5, " "));//hello world
+        // StringBuffer insert(int offset, String str)指定索引处插入指定字符串，其余内容后移
+        System.out.println(stringBuffer.insert(5, " "));// hello world
 
-        //void setCharAt(int index, char ch)指定索引处字符，替换为指定字符
+        // void setCharAt(int index, char ch)指定索引处字符，替换为指定字符
         stringBuffer.setCharAt(0, 'H');
-        System.out.println(stringBuffer);//Hello world
+        System.out.println(stringBuffer);// Hello world
 
-        //StringBuffer replace(int start, int end, String str)指定索引 start 到 end 之前的字符子串，替换为指定字符串
-        //索引从0开始，替换索引[6, 7)的内容 = "w" -> "W"
-        System.out.println(stringBuffer.replace(6, 7, "W"));//Hello World
+        // StringBuffer replace(int start, int end, String str)指定索引 start 到 end 之前的字符子串，替换为指定字符串
+        // 索引从0开始，替换索引[6, 7)的内容 = "w" -> "W"
+        System.out.println(stringBuffer.replace(6, 7, "W"));// Hello World
 
-        //StringBuffer reverse()字符串反转
-        System.out.println(stringBuffer.reverse());//dlroW olleH
+        // StringBuffer reverse()字符串反转
+        System.out.println(stringBuffer.reverse());// dlroW olleH
     }
 }
