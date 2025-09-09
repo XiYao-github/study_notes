@@ -32,19 +32,19 @@ public class SE_12_Interface {
      * 5.私有方法的冲突：不存在冲突
      */
     public static void extendsTest() {
-        ABC abc = new ABC();
+        Class_AC ac = new Class_AC();
         // 公有静态常量，变量同名就会报错，实现类无法继承有冲突的常量
         // System.out.println(ABC.NUM1); //编译报错
         // System.out.println(ABC.NUM2); //编译报错
         // System.out.println(ABC.NUM3); //编译报错
         // System.out.println(ABC.NUM4); //编译报错
-        System.out.println(abc.NUM5);
+        System.out.println(ac.NUM5);
         // 公有抽象方法，访问重写方法
-        abc.abstractMethod();
+        ac.abstractMethod();
         // 公有默认方法，优先访问父类
-        abc.defaultMethod();
+        ac.defaultMethod();
         // 公有静态方法，优先访问父类
-        ABC.staticMethod();
+        Class_AC.staticMethod();
     }
 
     /**
@@ -56,12 +56,12 @@ public class SE_12_Interface {
      * 5.私有方法的冲突：不存在冲突
      */
     public static void interfaceTest() {
-        AB ab = new AB();
+        Class_AB ab = new Class_AB();
         // 公有静态常量
-        // System.out.println(AB.NUM1); //编译报错
-        // System.out.println(AB.NUM2); //编译报错
-        System.out.println(AB.NUM3);
-        System.out.println(AB.NUM4);
+        // System.out.println(Class_AB.NUM1); //编译报错
+        // System.out.println(Class_AB.NUM2); //编译报错
+        System.out.println(Class_AB.NUM3);
+        System.out.println(Class_AB.NUM4);
         // 公有抽象方法
         ab.abstractMethod();
         // 公有默认方法
@@ -115,7 +115,7 @@ class Pig_Interface implements Animal_Interface {
  * - 接口和接口的关系：多继承，一个接口可以继承多个接口。
  * - 接口多继承：规范合并，整合多个接口为同一个接口，便于子类实现。
  */
-interface A_Interface {
+interface Interface_A {
     public static final int NUM1 = 10;
     public static final int NUM2 = 20;
     public static final int NUM3 = 30;
@@ -131,7 +131,7 @@ interface A_Interface {
     }
 }
 
-interface B_Interface {
+interface Interface_B {
     public static final int NUM1 = 100;
     public static final int NUM2 = 200;
     public static final int NUM4 = 400;
@@ -147,7 +147,22 @@ interface B_Interface {
     }
 }
 
-abstract class C_Abstraction {
+// 接口多继承
+interface Interface_C extends Interface_A, Interface_B {
+
+    @Override
+    public void abstractMethod();
+
+    @Override
+    public default void defaultMethod() {
+        Interface_A.super.defaultMethod();
+        System.out.println("C接口默认方法：defaultMethod");
+    }
+
+}
+
+// 类单实现
+abstract class Abstraction_C {
     public static final int NUM1 = 1000;
     public static final int NUM2 = 2000;
     public static final int NUM3 = 3000;
@@ -165,20 +180,8 @@ abstract class C_Abstraction {
     }
 }
 
-// 接口多继承
-interface C_Interface extends A_Interface, B_Interface {
-    @Override
-    public void abstractMethod();
+class Class_AC extends Abstraction_C implements Interface_C {
 
-    @Override
-    public default void defaultMethod() {
-        A_Interface.super.defaultMethod();
-        System.out.println("C接口默认方法：defaultMethod");
-    }
-}
-
-// 类单实现
-class ABC extends C_Abstraction implements C_Interface {
     @Override
     public void abstractMethod() {
         System.out.println("ABC类抽象方法：abstractMethod");
@@ -186,7 +189,7 @@ class ABC extends C_Abstraction implements C_Interface {
 }
 
 // 类多实现
-class AB implements A_Interface, B_Interface {
+class Class_AB implements Interface_A, Interface_B {
     @Override
     public void abstractMethod() {
         System.out.println("AB类抽象方法：abstractMethod");
@@ -194,7 +197,7 @@ class AB implements A_Interface, B_Interface {
 
     @Override
     public void defaultMethod() {
-        A_Interface.super.defaultMethod();
+        Interface_A.super.defaultMethod();
         System.out.println("AB类默认方法：defaultMethod");
     }
 }

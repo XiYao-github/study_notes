@@ -24,7 +24,6 @@ package com.study.hello;
  * - 有四种作用范围由小到大(private(本类) -> 缺省(同一个包中) -> protected(同一个包及子类中) -> public(不同包中))
  */
 public class SE_07_Encapsulation {
-
 }
 
 /**
@@ -39,7 +38,8 @@ class Encapsulation_Bean {
 
     private String name;
 
-    public Encapsulation_Bean() {}
+    public Encapsulation_Bean() {
+    }
 
     public Encapsulation_Bean(String name) {
         this.name = name;

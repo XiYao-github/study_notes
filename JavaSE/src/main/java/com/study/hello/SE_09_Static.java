@@ -4,7 +4,7 @@ package com.study.hello;
  * static
  * - static是静态的意思，可以修饰成员变量,成员方法。
  * - static修饰成员变量之后称为静态成员变量(类变量)，修饰方法之后称为静态方法(类方法)。
- * - static修饰后的成员变量，可以被类的所有对象共享(访问,修改)。
+ * - static修饰后的成员变量(类变量)，可以被类的所有对象共享(访问,修改)。
  * - 类方法中可以直接访问类的成员，不可以直接访问实例成员，方法内部不可以出现this和super关键字。
  * - 实例方法中可以直接访问类成员，也可以直接访问实例成员，方法内部可以出现this和super关键字。
  * <p>
@@ -25,9 +25,9 @@ public class SE_09_Static {
      */
     public static void main(String[] args) {
         // 调用类方法
-        Static.myName(Static.name);
+        Static_Main.myName(Static_Main.name);
         // 调用成员方法
-        Static aStatic = new Static();
+        Static_Main aStatic = new Static_Main();
         aStatic.myPhone(aStatic.phone);
 
         // 类什么时候被加载(重要)
@@ -43,13 +43,13 @@ public class SE_09_Static {
         // 4.父类的构造方法
         // 5.子类的普通属性/代码块初始化
         // 6.子类的构造方法
-        // Parent_Main parent = new Parent_Main(); //调用：1,3,4
-        // Sub_Main sub = new Sub_Main(); //调用：1,2,3,4,5,6
-        Sub_Main.study(); //调用：1,2
+        // Static_Parent parent = new Static_Parent(); //调用：1,3,4
+        // Static_Sub sub = new Static_Sub(); //调用：1,2,3,4,5,6
+        Static_Sub.study(); //调用：1,2
     }
 }
 
-class Static {
+class Static_Main {
     /**
      * 静态成员变量
      * - 有static修饰，属于类,加载一次，内存中只有一份
@@ -111,7 +111,7 @@ class Static {
     }
 }
 
-class Parent_Main {
+class Static_Parent {
     private static String name;
     private String type;
 
@@ -125,14 +125,14 @@ class Parent_Main {
         System.out.println("3." + type + "的普通属性/代码块初始化！！！");
     }
 
-    public Parent_Main() {
-        //super();
-        //会在super()后隐含的调用本类代码块
+    public Static_Parent() {
+        // super();
+        // 会在super()后隐含的调用本类代码块
         System.out.printf("4.%s(%s)的构造方法初始化！！！\n", name, type);
     }
 }
 
-class Sub_Main extends Parent_Main {
+class Static_Sub extends Static_Parent {
     private static String name;
     private String type;
 
@@ -146,9 +146,9 @@ class Sub_Main extends Parent_Main {
         System.out.println("5." + type + "的普通属性/代码块初始化！！！");
     }
 
-    public Sub_Main() {
-        //super();
-        //会在super()后隐含的调用本类代码块
+    public Static_Sub() {
+        // super();
+        // 会在super()后隐含的调用本类代码块
         System.out.printf("6.%s(%s)的构造方法初始化！！！\n", name, type);
     }
 

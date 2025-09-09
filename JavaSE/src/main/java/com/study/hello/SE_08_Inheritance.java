@@ -2,7 +2,7 @@ package com.study.hello;
 
 /**
  * 继承(is-a:它是)
- * - 继承可以解决代码复用，让我们的编程更加靠近人类思维。
+ * - 继承可以提高代码的复用性，让我们的编程更加靠近人类思维。
  * - Java中提供一个关键字extends，用这个关键字，我们可以让一个类和另一个类建立起父子关系。
  * - 当多个类存在相同的变量/方法时，可以从这些类中抽象出父类，在父类中定义这些相同的属性/方法，所有的子类不需要重新定义这些属性和方法，只需要通过extends来声明继承父类即可。
  * <p>
@@ -25,16 +25,16 @@ public class SE_08_Inheritance {
         // 作用：当子类继承父类后，就可以直接使用父类公共的属性和方法了。
         // 好处：提高代码复用性，减少代码冗余，增强类的功能扩展性。
         System.out.println("-----调用狗类无参构造器-----");
-        Dog_Inheritance dog = new Dog_Inheritance();
+        Inheritance_Dog dog = new Inheritance_Dog();
         System.out.println("-----调用狗类有参构造器-----");
-        Dog_Inheritance dogName = new Dog_Inheritance("旺财", 3);
+        Inheritance_Dog dogName = new Inheritance_Dog("旺财", 3);
         System.out.println("-----调用狗类已重写方法-----");
         dogName.eat();
         System.out.println();
         System.out.println("-----调用猫类无参构造器-----");
-        Cat_Inheritance cat = new Cat_Inheritance();
+        Inheritance_Cat cat = new Inheritance_Cat();
         System.out.println("-----调用猫类有参构造器-----");
-        Cat_Inheritance catName = new Cat_Inheritance("三花", 2);
+        Inheritance_Cat catName = new Inheritance_Cat("三花", 2);
         System.out.println("-----调用猫类已重写方法-----");
         catName.eat();
     }
@@ -50,16 +50,16 @@ public class SE_08_Inheritance {
  * - 子类构造器的第一行语句默认都是super()，不写也存在。
  * - super()和this()都只能放在构造器第一行，因此这两个方法不能共存在一个构造器。
  */
-class Animal_Inheritance {
+class Inheritance_Animal {
     public String name;
     public int age;
 
-    public Animal_Inheritance() {
+    public Inheritance_Animal() {
         super();
         System.out.println("动物类无参构造方法初始化...");
     }
 
-    public Animal_Inheritance(String name, int age) {
+    public Inheritance_Animal(String name, int age) {
         this();
         System.out.println("动物类有参构造方法初始化...");
         this.name = name;
@@ -78,13 +78,13 @@ class Animal_Inheritance {
     }
 }
 
-class Dog_Inheritance extends Animal_Inheritance {
-    public Dog_Inheritance() {
+class Inheritance_Dog extends Inheritance_Animal {
+    public Inheritance_Dog() {
         super();
         System.out.println("狗类无参构造方法初始化...");
     }
 
-    public Dog_Inheritance(String name, int age) {
+    public Inheritance_Dog(String name, int age) {
         super(name, age);
         System.out.println("狗类有参构造方法初始化...");
     }
@@ -95,13 +95,13 @@ class Dog_Inheritance extends Animal_Inheritance {
     }
 }
 
-class Cat_Inheritance extends Animal_Inheritance {
-    public Cat_Inheritance() {
+class Inheritance_Cat extends Inheritance_Animal {
+    public Inheritance_Cat() {
         super();
         System.out.println("猫类无参构造方法初始化...");
     }
 
-    public Cat_Inheritance(String name, int age) {
+    public Inheritance_Cat(String name, int age) {
         this();
         System.out.println("猫类有参构造方法初始化...");
         this.name = name;

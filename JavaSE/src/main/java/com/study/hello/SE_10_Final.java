@@ -16,12 +16,12 @@ package com.study.hello;
 public class SE_10_Final {
     public static void main(String[] args) {
         // final修饰的类，不能继承，但是可以实例化对象
-        A_Final a = new A_Final("TEST_5");
+        Final_A a = new Final_A("TEST_5");
         a.study();
         System.out.println();
 
         // 不是final类，但是含有final方法，方法虽然不能重写，但是可以被继承
-        C_Final c = new C_Final();
+        Final_C c = new Final_C();
         c.study();
         System.out.println();
 
@@ -33,7 +33,7 @@ public class SE_10_Final {
 
         // 修饰属性时static和final可以搭配使用，效率更高(编译器做了优化处理)，可以不加载类直接使用属性。
         // 调用D类的TEST_1属性并没有加载D类的静态代码块，可见没有加载类信息(编译器做了优化处理)。
-        System.out.println(D_Final.TEST_1);
+        System.out.println(Final_D.TEST_1);
     }
 }
 
@@ -49,7 +49,7 @@ public class SE_10_Final {
  * - final修饰是基本类型，那么变量存储的数据值不能发生改变。
  * - final修饰是引用类型，那么变量存储的地址值不能发生改变，但是地址指向的对象内容是可以发生变化的。
  */
-final class A_Final {
+final class Final_A {
     // 定义时赋初值
     private static final String TEST_1 = "TEST_1";
     private final String TEST_2 = "TEST_2";
@@ -69,7 +69,7 @@ final class A_Final {
     }
 
     // 使用构造器赋值，就不能写其他构造器，不然存在无法初始化变量的情况
-    public A_Final(String variable) {
+    public Final_A(String variable) {
         TEST_5 = variable;
     }
 
@@ -78,19 +78,19 @@ final class A_Final {
     }
 }
 
-class B_Final {
+class Final_B {
     public final void study() {
         System.out.println("正在学习！！！");
     }
 }
 
-class C_Final extends B_Final {
+class Final_C extends Final_B {
     static {
         System.out.println("静态代码块被加载！！！");
     }
 }
 
-class D_Final {
+class Final_D {
     public static final String TEST_1 = "D_TEST_1";
 
     static {
