@@ -162,7 +162,7 @@ interface Interface_C extends Interface_A, Interface_B {
 }
 
 // 类单实现
-abstract class Abstraction_C {
+abstract class Abstraction_A {
     public static final int NUM1 = 1000;
     public static final int NUM2 = 2000;
     public static final int NUM3 = 3000;
@@ -180,7 +180,7 @@ abstract class Abstraction_C {
     }
 }
 
-class Class_AC extends Abstraction_C implements Interface_C {
+class Class_AC extends Abstraction_A implements Interface_C {
 
     @Override
     public void abstractMethod() {

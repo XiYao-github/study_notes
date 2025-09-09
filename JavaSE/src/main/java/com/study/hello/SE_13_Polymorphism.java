@@ -16,7 +16,7 @@ package com.study.hello;
 public class SE_13_Polymorphism {
     public static void main(String[] args) {
         // 多态的常见形式：父类类型 对象名称 = new 子类构造器;
-        // Animal_Polymorphism animal = new Dog_Polymorphism();
+        // Polymorphism_Animal animal = new Dog_Polymorphism();
 
         /**
          * 向上转型(从子到父)
@@ -25,7 +25,7 @@ public class SE_13_Polymorphism {
          * - 不能调用子类的特有的成员，因为在编译阶段，能调用哪些成员，是由编译类型来决定的
          * - 最终运行效果看子类(运行类型)的具体实现， 即调用方法时，按照从子类(运行类型)开始查找方法调用
          */
-        Animal_Polymorphism animal = new Dog_Polymorphism();
+        Polymorphism_Animal animal = new Polymorphism_Dog();
         // 变量调用：编译看左边，运行也看左边(注意)
         System.out.println(animal.name);
         // 方法调用：编译看左边，运行看右边
@@ -40,8 +40,8 @@ public class SE_13_Polymorphism {
          * - 作用：可以解决多态下的劣势，可以实现调用子类独有的功能
          * - Java建议强转转换前使用instanceof判断当前对象的真实类型，再进行强制转换
          */
-        if (animal instanceof Dog_Polymorphism) {
-            Dog_Polymorphism dog = (Dog_Polymorphism) animal;
+        if (animal instanceof Polymorphism_Dog) {
+            Polymorphism_Dog dog = (Polymorphism_Dog) animal;
             // 可以调用子类独有的功能
             dog.eat();
         }
@@ -53,8 +53,8 @@ public class SE_13_Polymorphism {
          * - 当调用对象方法时，该方法会和该对象的内存地址/运行类型绑定。
          * - 当调用对象属性时，没有动态绑定机制，哪里声明，那里使用。
          */
-        Animal_Polymorphism dog = new Dog_Polymorphism();
-        Animal_Polymorphism cat = new Cat_Polymorphism();
+        Polymorphism_Animal dog = new Polymorphism_Dog();
+        Polymorphism_Animal cat = new Polymorphism_Cat();
         //调用重写方法，运行类型为Dog，在Dog类中运行
         //运行方法：调用Dog类中的getAge()方法，使用Dog类中的age变量
         System.out.println(dog.Age_1()); //3+3
@@ -70,7 +70,7 @@ public class SE_13_Polymorphism {
     }
 }
 
-class Animal_Polymorphism {
+class Polymorphism_Animal {
     public String name = "动物";
     public int age = 5;
 
@@ -92,7 +92,7 @@ class Animal_Polymorphism {
     }
 }
 
-class Dog_Polymorphism extends Animal_Polymorphism {
+class Polymorphism_Dog extends Polymorphism_Animal {
     private String name = "狗";
     private int age = 3;
 
@@ -116,7 +116,7 @@ class Dog_Polymorphism extends Animal_Polymorphism {
     }
 }
 
-class Cat_Polymorphism extends Animal_Polymorphism {
+class Polymorphism_Cat extends Polymorphism_Animal {
     private String name = "猫";
     private int age = 2;
 
